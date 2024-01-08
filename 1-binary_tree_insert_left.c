@@ -11,12 +11,23 @@ binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 	if (parent == NULL)
 		return (NULL);
 
-	if (parent->left == NULL)
-		/*If left is NULL, create a new node and assign it to left child*/
-		parent->left = binary_tree_node(parent, value);
+	/*Call binary_tree_node to create a new node*/
+	binary_tree_t *new_node = binary_tree_node(parent, value);
 
-	else
+	if (new_node == NULL)
+	{
+		fprintf(stderr, "Memory allocation failed\n");
 		return (NULL);
+	}
+	/*If the parent already has a left child...*/
+	if (parent->left != NULL)
+	{
+		/*...make it the left child of the new node*/
+		new_node->left = parent->left;
+		new_node->left->parent = new_node;
+	}
+	/*Set the new node as the left child of the parent*/
+	parent->left = new_node;
 
-	return (parent->left);
+	return (new_node);
 }
