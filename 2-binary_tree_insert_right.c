@@ -12,7 +12,7 @@ binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
 
 	if (parent == NULL)
 		return (NULL);
-
+	/*Create a new node with the given value*/
 	new_node = binary_tree_node(parent, value);
 
 	if (new_node == NULL)
@@ -20,13 +20,14 @@ binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
 		fprintf(stderr, "Memory allocation failed\n");
 		return (NULL);
 	}
-
+	/*If the parent already has a right child...*/
 	if (parent->right != NULL)
 	{
+		/*...update the new node's right child and its parent*/
 		new_node->right = parent->right;
 		new_node->right->parent = new_node;
 	}
-
+	/*Set the parent's right child to the new node.*/
 	parent->right = new_node;
 
 	return (new_node);
