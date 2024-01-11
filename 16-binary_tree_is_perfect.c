@@ -12,16 +12,16 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 
 	if (tree == NULL)
 		return (0);
-
+	/*Calculate the height of the left and right subtrees.*/
 	left_height = binary_tree_height(tree->left);
 	right_height = binary_tree_height(tree->right);
-
+	/*If height of the left and right subtrees isn't equal, tree is not perfect.*/
 	if (left_height != right_height)
 		return (0);
-
+	/*If the current node is a leaf, single-node tree considered perfect*/
 	if (tree->left == NULL && tree->right == NULL)
 		return (1);
-
+	/*Recursively check if both the left and right subtrees are perfect.*/
 	return (binary_tree_is_perfect(tree->left)
 			&& binary_tree_is_perfect(tree->right));
 }
